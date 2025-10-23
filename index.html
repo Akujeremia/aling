@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayangg alingg</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a0b2e, #2d1b69, #4a2c8c);
+            color: #e6d4ff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Efek bintang */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 30px;
+            background: rgba(74, 44, 140, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #c77dff, #e0aaff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(199, 125, 255, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #d8b4fe;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: center;
+            background: rgba(45, 27, 105, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid #9d4edd;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: rgba(74, 44, 140, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #7b2cbf, #9d4edd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #e0aaff;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #d0b3ff;
+        }
+
+        .heart {
+            color: #ff6b9d;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 60px 0 40px;
+        }
+
+        .explore-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #9d4edd, #c77dff);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .explore-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(157, 78, 221, 0.6);
+        }
+
+        .explore-button:active {
+            transform: translateY(0);
+        }
+
+        .explore-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .explore-button:hover::before {
+            left: 100%;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            font-size: 1rem;
+            color: #c77dff;
+            border-top: 1px solid rgba(199, 125, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .explore-button {
+                padding: 12px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efek bintang -->
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <header>
+            <h1>Buattt Sayangkuu <span class="heart">❤️</span></h1>
+            <p class="subtitle">aiii nakk bilanggg</p>
+        </header>
+
+        <section class="message">
+            <p>Terima kasiii sayangg bwattt semuaa cintaa yangg dahh kamuu kasihkann kee aii hehehhe. ai cumaa bisa bikinin inii lagi ke kamuu huhuhuhu
+            maaff yeaa kaloo jelekkk heheheh. tauuu gaa siii sayanggg, kalooo aiii senennggg bangettt bisaa samaa kamuuu, day day aii lebihh funn
+            lebihh wahhh lebihh wohhh HAHAHAHHAAH. Tapiii sayangg maafinn aii yaa kaloo aii lomm bisaa senenginn kamuu sepertii yang
+            kamuu pengennn. aii kaloo diajak kamuu mainn, olweys adaa ajaa alasannyaa huhuhuhu, aii jugaa pengenn main truss sama kamu kokk sayanggg.
+            maaffinn aii yeaa, aii akann usahakann yangg terbaikk buatt yuuu heheheyyy. Trusss sayanggg bisnii kann adaa TKA yaaa, semangatt yesss
+            jujurr TKA inii huhhhh cuapekkk buangettt ngettt huhuhuhu, capeee pengenn pelukkkk :( semangatt buatt kitaa dehh yaa yangg mauu TKA iniii
+            Semogaa kitaa diberii nilaii yangg memuaskann. AAAMIIINNNNN. ohyaa sayangg kalooo kamuu lagii cuapekk, adaa akuu kokkk kamuu bisa critaa masalah
+            kamuu ke akuu, kamuu manjaa kee akuuu malahhh akuuu sukaaa hehehehhe. truss kuranginn ovt nyaa yeaaa, entahh tentang masa depann taa
+            atauu pendapat orangg lainn taaa, kamuuu adalahh kamuu akuu yakinn kamuu bisaaa adepinn semuanya aii yakinnn. jangan lupaa andelin Allah
+            disetiap hidupmuuu yeaaa. heummm seginiii ajaa, inii masii 10% dari yangg aii nak bilangkann ke kamuu. terimaaa kasihh yaa sayangkuu cintaakuuu, iniii adaa memorii fotoo kitaa.
+            LOVYUUU SEKEBONN HEHEHHEEHEH💕</p>
+        </section>
+
+        <section class="gallery">
+            <!-- Kartu 1 - Ganti URL gambar di src -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img class="card-img" src="img/fotbar1.jpeg" alt="Galaksi Indah">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Fotbarr pas nikahann mbakk</h3>
+                    <p class="card-desc">heheheh disiniii kamuuu keliatannn cuantikkk pollll
+                        emann kalooo gaa fotoo sama anak secantik iniii
+                    </p>
+                </div>
+            </div>
+
+            <!-- Kartu 2 - Ganti URL gambar di src -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img class="card-img" src="img/fotbar hehe.jpeg" alt="Bintang Bersinar">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">anjayyy vintage</h3>
+                    <p class="card-desc">iniii gemesss jirrr bawaannyaa vintagee abisss wkwkkwkwk</p>
+                </div>
+            </div>
+
+            <!-- Kartu 3 - Ganti URL gambar di src -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img class="card-img" src="img/fotbar2.jpeg" alt="Planet Indah">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">fotooo hari batikk</h3>
+                    <p class="card-desc">heheheh akuu fotoo samaa cewee cantikk yangg pakee batikk. imutt jirrr</p>
+                </div>
+            </div>
+
+            <!-- Kartu 4 - Ganti URL gambar di src -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img class="card-img" src="img/rawer.jpeg" alt="Bintang Jatuh">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">cantikk waaa</h3>
+                    <p class="card-desc">iniii kamuuu gemesinn jirrr kayakk anakk macann</p>
+                </div>
+            </div>
+
+            <!-- Kartu 5 - Ganti URL gambar di src -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img class="card-img" src="img/gemess.jpeg" alt="Roket Luar Angkasa">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">ciii imuttt aselii banjarsyarii</h3>
+                    <p class="card-desc">gemesss cantikkk hehehehhehehe. besokk besokk papin khusus aiii</p>
+                </div>
+            </div>
+
+            <!-- Kartu 6 - Ganti URL gambar di src -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img class="card-img" src="img/menari.jpeg" alt="Nebula Indah">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">alinggg menariii</h3>
+                    <p class="card-desc">JIRRRR INNIIII CUANTIKKK, PAKEE BAJUU NARIII. AII PENGENN FOTBARR PAS YUUU
+                        PAKAIII ITUUU HUHUHUHUHUHU
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="button-container">
+            <a href="https://love.tsonit.com/hadiahbwatalingg" class="explore-button" target="_blank">
+                Buattt alinggggg
+            </a>
+        </div>
+
+        <footer>
+            <p>Dibuat olehhh jeremoyyy rajaa kodingg</p>
+        </footer>
+    </div>
+
+    <script>
+        // Membuat efek bintang
+        document.addEventListener('DOMContentLoaded', function() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Posisi acak
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                
+                // Ukuran acak
+                const size = Math.random() * 3 + 1;
+                
+                // Durasi animasi acak
+                const duration = Math.random() * 5 + 3;
+                
+                // Delay animasi acak
+                const delay = Math.random() * 5;
+                
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        });
+    </script>
+</body>
+</html>
